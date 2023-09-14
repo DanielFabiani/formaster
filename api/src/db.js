@@ -12,11 +12,10 @@ const sequelize = new Sequelize(
   }
 );
 
-//test de conexión
-/* 
+//test de conexión 
 sequelize.authenticate()
   .then(() => console.log('Connection has been established successfully.'))
-  .catch(error => console.log('Unable to connect to the database:', error)) */
+  .catch(error => console.log('Unable to connect to the database:', error))
 
 const basename = path.basename(__filename);
 
@@ -44,17 +43,9 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Videogame, Genre } = sequelize.models;
+const { Form } = sequelize.models;
 
 // Aca vendrían las relaciones
-Videogame.belongsToMany(Genre, {
-  through: "gamesGenre",
-  timestamps: false,
-});
-Genre.belongsToMany(Videogame, {
-  through: "gamesGenre",
-  timestamps: false,
-});
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
