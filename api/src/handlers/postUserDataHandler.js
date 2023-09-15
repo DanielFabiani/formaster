@@ -1,33 +1,31 @@
-const postDataVideoGames = require("../controllers/postGamesController");
+const postUserDataController = require("../controllers/postUserDataController");
 
-const postVideoGames = async (req, res) => {
+const postUserDataHandler = async (req, res) => {
   const {
     name,
-    description,
-    platforms,
-    image,
-    released,
-    rating,
-    genres,
+    phoneNumber,
+    startDate,
+    preferredLanguage,
+    howFound,
+    newsletterSubscription,
   } = req.body;
-  if (!name || !description) {
+  if ( !name ) {
     return res.status(404).send("Falta enviar datos obligatorios");
   }
   try {
-    const postGame = await postDataVideoGames(
+    const postUserData = await postUserDataController(
       name,
-      description,
-      platforms,
-      image,
-      released,
-      rating,
-      genres,
+      phoneNumber,
+      startDate,
+      preferredLanguage,
+      howFound,
+      newsletterSubscription,
     );
-    console.log(postGame, 'Juego creado correctamente')
-    res.status(200).json(postGame);
+    console.log(postUserData, 'User data creada correctamente')
+    res.status(200).json(postUserData);
   } catch (error) {
     res.status(404).json({ error: error.message });
   }
 };
 
-module.exports = postVideoGames;
+module.exports = postUserDataHandler;

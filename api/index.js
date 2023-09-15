@@ -18,7 +18,6 @@
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require('./src/app.js');
-const allGenres = require('./src/controllers/getGenresController.js');
 const { conn } = require('./src/db.js');
 require('dotenv').config();
 
