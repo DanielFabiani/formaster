@@ -21,7 +21,10 @@ const allFormData = async ()=> {
   // creo el objeto que voy a devolver cada propiedad name del json
   const formData = createItems.items.map( item => {
       const extractedData = {
+        type: item.type === 'tel' ? 'number' : item.type,
+        label:item.label,
         name: item.name,
+        required: item.required || false,
       };
       
       if (item.options) {
@@ -29,8 +32,7 @@ const allFormData = async ()=> {
       }
       
       return extractedData;
-    }
-    );
+  });
     
   console.log(formData, 'items cargados');
   return formData;

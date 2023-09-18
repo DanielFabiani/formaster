@@ -1,17 +1,23 @@
 //importo las actions
+import { GET_FORM } from "./actions";
 
-/* const initialState = {
+const initialState = {
+  Form: [],
+};
 
-}; */
 
-/* 
-export default (state = initialState, { type, payload }) => {
-  switch (type) {
+const reducer =  (state = initialState, action ) => {
+  switch (action.type) {
 
-  case first:
-    return { ...state, ...payload }
+  case GET_FORM:
+    return { 
+      ...state, 
+      Form: action.payload
+    };
 
   default:
-    return state
+    return{ ...state }
   }
-} */
+}
+
+export default reducer;
