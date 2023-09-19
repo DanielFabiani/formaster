@@ -1,5 +1,5 @@
 //importo las actions
-import { GET_FORM } from "./actions";
+import { GET_FORM, UPDATE_FORM_DATA } from "./actions";
 
 const initialState = {
   Form: [],
@@ -14,7 +14,12 @@ const reducer =  (state = initialState, action ) => {
       ...state, 
       Form: action.payload
     };
-
+    
+    case UPDATE_FORM_DATA:
+      return {
+        ...state,
+        [action.payload.name]: action.payload.value,
+      };
   default:
     return{ ...state }
   }
