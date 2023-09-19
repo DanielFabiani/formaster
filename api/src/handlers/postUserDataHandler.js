@@ -2,24 +2,24 @@ const postUserDataController = require("../controllers/postUserDataController");
 
 const postUserDataHandler = async (req, res) => {
   const {
-    name,
-    phoneNumber,
-    startDate,
-    preferredLanguage,
-    howFound,
-    newsletterSubscription,
+    full_name,
+    phone_number,
+    start_date,
+    preferred_language,
+    how_found,
+    newsletter_subscription,
   } = req.body;
-  if ( !name ) {
+  if ( !full_name ) {
     return res.status(404).send("Falta enviar datos obligatorios");
   }
   try {
     const postUserData = await postUserDataController(
-      name,
-      phoneNumber,
-      startDate,
-      preferredLanguage,
-      howFound,
-      newsletterSubscription,
+      full_name,
+      phone_number,
+      start_date,
+      preferred_language,
+      how_found,
+      newsletter_subscription,
     );
     console.log(postUserData, 'User data creada correctamente')
     res.status(200).json(postUserData);

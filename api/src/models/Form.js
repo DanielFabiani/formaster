@@ -13,29 +13,29 @@ module.exports = (sequelize) => {
       type: DataTypes.JSON,
       allowNull: false
     }, */
-    name: {
+    full_name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    phoneNumber: {
+    phone_number: {
       type: DataTypes.STRING,
       allowNull: true, // en caso que no tome la información
     },
-    startDate: {
+    start_date: {
       type: DataTypes.DATEONLY,
-      allowNull: false,
+      allowNull: true,
     },
-    preferredLanguage: {
+    preferred_language: {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    howFound: {
+    how_found: {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    newsletterSubscription: {
+    newsletter_subscription: {
       type: DataTypes.BOOLEAN,
-      allowNull: false,
+      allowNull: true,
     },
     
   });

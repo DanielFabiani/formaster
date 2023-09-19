@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 export const GET_FORM = 'GET_FORM';
-export const UPDATE_FORM_DATA = 'UPDATE_FORM_DATA';
+export const POST_FORM = 'POST_FORM';
+
 
 //traigo el formulario completo
 export const getFormData = () => {
@@ -19,7 +20,16 @@ export const getFormData = () => {
   }
 };
 
-export const updateFormData = (data) => ({
-  type: UPDATE_FORM_DATA,
-  payload: data,
-});
+export const postFormData = (data) => {
+  return async (dispatch) => {
+    try {
+      const postFormData = await axios.post('/formData', data);
+      dispatch({
+        type: POST_FORM,
+        payload: postFormData
+      })
+    } catch (error) {
+      console.error(error.message);
+    }
+  }
+}

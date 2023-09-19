@@ -8,10 +8,10 @@ const { Form } = require("../db");
 //GET | cargo en la DB todo el formulario del json
 const allFormData = async () => {
   const items = await Form.findAll();
-  if (items.length) {
+  /* if (items.length) {
     console.log("ya hay items para el formulario");
     return;
-  }
+  } */
 
   const createItems = JSON.parse(
     fs.readFileSync(path.join(__dirname, "../data/form.json"))

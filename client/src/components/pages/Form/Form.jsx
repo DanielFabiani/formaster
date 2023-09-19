@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect /* useState  */ } from "react";
-import { getFormData } from "../../../redux/actions";
+import { getFormData, postFormData } from "../../../redux/actions";
 
 import style from "./Form.module.css";
 import {
@@ -44,8 +44,19 @@ const Form = () => {
   });
 
   const handleSubmit = (data) => {
-    /* data.preventDefault(); */
-    console.log(data);
+
+    try {
+      dispatch(postFormData(data))
+      alert('form enviado')
+      console.log("Datos enviados: ", data);
+      // Limpiar el formulario y restablecer los valores iniciales
+      /* formik.resetForm(''); */
+      setTimeout(function() {
+        window.location.reload()
+      }, 300)
+    } catch (error) {
+      console.error(error.message);
+    }
   };
 
   const validationSchema = Yup.object().shape(
@@ -62,12 +73,6 @@ const Form = () => {
     onSubmit: handleSubmit,
     validationSchema,
   });
-
-  /*   const [selectedValue, setSelectedValue] = useState('');
-
-const handleChange = (event) => {
-  setSelectedValue(event.target.value);
-}; */
 
   return (
     <div className={style.formContainer}>
@@ -128,21 +133,19 @@ const handleChange = (event) => {
         {formData.map((item, i) => {
           if (item.type === "radio") {
             return (
-              <FormControl key={i} sx={{ marginTop: "28px" }} required={item.required}>
+              <FormControl
+                key={i}
+                sx={{ marginTop: "28px" }}
+                required={item.required}
+              >
                 <FormLabel>{item.label}</FormLabel>
-                <RadioGroup
-                  name={item.name}
-                  
-                  //value={value} // Asegúrate de que "value" sea el valor seleccionado correcto
-                  //onChange={handleChange}
-                >
+                <RadioGroup name={item.name}>
                   {item.options &&
-                    item.options.map((option) => {
+                    item.options.map((option, index) => {
                       return (
                         <FormControlLabel
-                          
                           onChange={formik.handleChange}
-                          key={option.value} // Usa el valor de la opción como clave
+                          key={index} // Usa el valor de la opción como clave
                           value={option.value} // Usa el valor de la opción como valor
                           control={<Radio />}
                           label={option.label} // Usa la etiqueta de la opción como etiqueta
@@ -150,7 +153,9 @@ const handleChange = (event) => {
                       );
                     })}
                 </RadioGroup>
-                <FormHelperText error>{formik.errors[item.name]}</FormHelperText>
+                <FormHelperText error>
+                  {formik.errors[item.name]}
+                </FormHelperText>
               </FormControl>
             );
           }
@@ -166,8 +171,6 @@ const handleChange = (event) => {
                     <Checkbox
                       icon={<FavoriteBorder />}
                       checkedIcon={<Favorite />}
-                      /* required={item.required} */
-                      //name={item.name} no necesito el name ya que uso el setFieldValue
                       checked={formik.values[item.name] || false} // Usa el valor de formik para el estado del checkbox
                       onChange={(event) => {
                         formik.setFieldValue(item.name, event.target.checked); // Actualiza el valor de formik en el evento onChange
