@@ -3,6 +3,7 @@ import axios from 'axios';
 export const GET_FORM = 'GET_FORM';
 export const POST_FORM = 'POST_FORM';
 export const ANSWERS = 'ANSWERS';
+export const PATCH_FORM = 'PATCH_FORM'
 
 
 //traigo el formulario completo
@@ -30,6 +31,21 @@ export const postFormData = (data) => {
         payload: postFormData
       })
     } catch (error) {
+      console.error(error.message);
+    }
+  }
+}
+
+export const patchUserForm = (data) => {
+  return async (dispatch) => {
+    try {
+      const patchData = await axios.patch('/formData', data);
+      dispatch ({
+        type: PATCH_FORM,
+        payload: patchData
+      })
+    }
+    catch (error) {
       console.error(error.message);
     }
   }

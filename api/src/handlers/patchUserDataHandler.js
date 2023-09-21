@@ -1,25 +1,25 @@
 const patchUserDataController = require("../controllers/patchUserDataController");
 
 const patchUserDataHandler = async (req, res) => {
-  const { id }= req.params;
+  //const { id }= req.params;
   const {
-    name,
-    phoneNumber,
-    startDate,
-    preferredLanguage,
-    howFound,
-    newsletterSubscription,
+    full_name,
+    phone_number,
+    start_date,
+    preferred_language,
+    how_found,
+    newsletter_subscription,
   } = req.body;
   
   try {
     const patchUserData = await patchUserDataController(
-      id,
-      name,
-      phoneNumber,
-      startDate,
-      preferredLanguage,
-      howFound,
-      newsletterSubscription,
+      //id,
+      full_name,
+      phone_number,
+      start_date,
+      preferred_language,
+      how_found,
+      newsletter_subscription,
     );
     console.log(patchUserData, 'usuario actualizado correctamente');
     res.status(200).json(patchUserData)

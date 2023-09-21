@@ -12,7 +12,7 @@ const gamesRoutes = Router();
 gamesRoutes.get('/', getAllFormData)
 gamesRoutes.get('/answers', getAnswersForm)
 gamesRoutes.get('/:id', getIdUserForm)
-gamesRoutes.patch('/:id', patchUserDataHandler)
+gamesRoutes.patch('/', patchUserDataHandler)
 gamesRoutes.post('/', postUserData) // primero hago el post para tener que buscar por id
 
 module.exports = gamesRoutes;

@@ -1,10 +1,11 @@
 //importo las actions
-import { ANSWERS, GET_FORM, POST_FORM } from "./actions";
+import { ANSWERS, GET_FORM, PATCH_FORM, POST_FORM } from "./actions";
 
 const initialState = {
   Form: [],
   PostForm: [],
   Answers: [],
+  Update: []
 };
 
 const reducer = (state = initialState, action) => {
@@ -25,7 +26,13 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         Answers: action.payload
-      }
+      };
+    
+    case PATCH_FORM:
+      return {
+        ...state,
+        Update: action.payload
+      };
 
     default:
       return { ...state };

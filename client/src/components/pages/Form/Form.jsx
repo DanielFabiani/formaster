@@ -55,25 +55,15 @@ const Form = () => {
 
       //alert('form enviado')
       Swal.fire({
-        title: "Respuestas enviadas correctamente correctamente!",
+        title: "Respuestas enviadas correctamente!",
         icon: 'success',
         showConfirmButton: false,
         timer: 2500,
-      }) /* .then((result) => {
-        if (result) {
-          setTimeout(function() {
-            window.location.reload()
-          }, 300)
-        }
-      }) */
+      }) 
 
       navigate('/answer')
       console.log("Datos enviados: ", data);
-      // Limpiar el formulario y restablecer los valores iniciales
-      /* formik.resetForm(''); */
-      /* setTimeout(function() {
-        window.location.reload()
-      }, 300) */
+      
     } catch (error) {
       console.error(error.message);
     }

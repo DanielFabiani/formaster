@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect /* useState  */ } from "react";
-import { answersForm, getFormData, postFormData } from "../../../redux/actions";
+import { getFormData, patchUserForm } from "../../../redux/actions";
 import { useNavigate } from "react-router-dom";
 
 import style from "./UpdateAnswers.module.css";
@@ -27,7 +27,7 @@ import Favorite from "@mui/icons-material/Favorite";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 
 const Form = () => {
   const dispatch = useDispatch();
@@ -37,7 +37,6 @@ const Form = () => {
   //console.log(formData, "data del form del estado");
 
   useEffect(() => {
-    dispatch(answersForm());
     dispatch(getFormData());
   }, [dispatch]);
 
@@ -51,31 +50,23 @@ const Form = () => {
   });
 
   const handleSubmit = (data) => {
-
     try {
-      dispatch(postFormData(data))
+      dispatch(patchUserForm(data));
 
-      //alert('form enviado')
       Swal.fire({
-        title: "Respuestas enviadas correctamente correctamente!",
-        icon: 'success',
+        title: "Respuestas actualizadas correctamente!",
+        icon: "success",
         showConfirmButton: false,
         timer: 2500,
-      }) /* .then((result) => {
+      }).then((result) => {
         if (result) {
-          setTimeout(function() {
-            window.location.reload()
-          }, 300)
+          setTimeout(function () {
+            window.location.reload();
+          }, 500);
+          navigate("/");
         }
-      }) */
-
-      navigate('/answer')
+      });
       console.log("Datos enviados: ", data);
-      // Limpiar el formulario y restablecer los valores iniciales
-      /* formik.resetForm(''); */
-      /* setTimeout(function() {
-        window.location.reload()
-      }, 300) */
     } catch (error) {
       console.error(error.message);
     }
@@ -95,30 +86,16 @@ const Form = () => {
     onSubmit: handleSubmit,
     validationSchema,
   });
-
-  //- usar para sacar el id
-  /* const answersData = useSelector((state) => state.Answers);
-
-  const answerForm = Object.entries(answersData)
-    .map(([key, value]) => {
-      if (key !== "id" && key !== "createdAt" && key !== "updatedAt") {
-        return value !== null && value !== undefined ? value : "No respondió"; // Cambio aquí para manejar campos vacíos
-      }
-      return undefined;
-    })
-    .filter((value) => value !== null && value !== undefined);
-
-  console.log(answerForm, "respuestas del form"); */
-
+  
   return (
     <div className={style.updateFormContainer}>
       <form className={style.updateForm} onSubmit={formik.handleSubmit}>
-      <Typography
-        sx={{ mt: 2, mb: 2, textAlign: "center", color: "#EE6C4D" }}
-        variant="h4"
-      >
-        Actualiza tus respuestas
-      </Typography>
+        <Typography
+          sx={{ mt: 2, mb: 2, textAlign: "center", color: "#EE6C4D" }}
+          variant="h4"
+        >
+          Actualiza tus respuestas
+        </Typography>
         <Grid
           container
           spacing={3}
@@ -170,7 +147,7 @@ const Form = () => {
             }
           })}
         </Grid>
-  
+
         {/* Grupo de radio para los botones de selección */}
         {formData.map((item, i) => {
           if (item.type === "radio") {
@@ -202,7 +179,7 @@ const Form = () => {
             );
           }
         })}
-  
+
         {/* checkbox para la suscripcion del newsletter */}
         {formData.map((item, index) => {
           if (item.type === "checkbox") {
@@ -227,7 +204,7 @@ const Form = () => {
             );
           }
         })}
-  
+
         <Button
           type="submit"
           className={style.button}
@@ -236,7 +213,7 @@ const Form = () => {
           endIcon={<SendIcon />}
           sx={{ marginTop: "22px" }}
         >
-          Enviar
+          Enviar actualización
         </Button>
       </form>
     </div>
