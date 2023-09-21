@@ -10,6 +10,12 @@ const server = express();
 
 server.name = 'API';
 
+const port = process.env.PORT ?? 8080;
+
+server.listen(port, () => {
+  console.log(`App listening on port ${port}`);
+});
+
 server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 server.use(bodyParser.json({ limit: '50mb' }));
 server.use(cookieParser());
