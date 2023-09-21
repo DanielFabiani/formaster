@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect /* useState  */ } from "react";
-import { getFormData, postFormData } from "../../../redux/actions";
+import { answersForm, getFormData, postFormData } from "../../../redux/actions";
 import { useNavigate } from "react-router-dom";
 
-import style from "./Form.module.css";
+import style from "./UpdateAnswers.module.css";
 import {
   Button,
   Checkbox,
@@ -18,6 +18,7 @@ import {
   Radio,
   RadioGroup,
   TextField,
+  Typography,
 } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
@@ -36,6 +37,7 @@ const Form = () => {
   //console.log(formData, "data del form del estado");
 
   useEffect(() => {
+    dispatch(answersForm());
     dispatch(getFormData());
   }, [dispatch]);
 
@@ -94,9 +96,29 @@ const Form = () => {
     validationSchema,
   });
 
+  //- usar para sacar el id
+  /* const answersData = useSelector((state) => state.Answers);
+
+  const answerForm = Object.entries(answersData)
+    .map(([key, value]) => {
+      if (key !== "id" && key !== "createdAt" && key !== "updatedAt") {
+        return value !== null && value !== undefined ? value : "No respondió"; // Cambio aquí para manejar campos vacíos
+      }
+      return undefined;
+    })
+    .filter((value) => value !== null && value !== undefined);
+
+  console.log(answerForm, "respuestas del form"); */
+
   return (
-    <div className={style.formContainer}>
-      <form className={style.form} onSubmit={formik.handleSubmit}>
+    <div className={style.updateFormContainer}>
+      <form className={style.updateForm} onSubmit={formik.handleSubmit}>
+      <Typography
+        sx={{ mt: 2, mb: 2, textAlign: "center", color: "#EE6C4D" }}
+        variant="h4"
+      >
+        Actualiza tus respuestas
+      </Typography>
         <Grid
           container
           spacing={3}

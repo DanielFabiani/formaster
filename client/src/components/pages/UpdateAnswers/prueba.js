@@ -1,9 +1,10 @@
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect /* useState  */ } from "react";
-import { getFormData, postFormData } from "../../../redux/actions";
+import { /* useDispatch, */ useSelector } from "react-redux";
+import { useEffect, /* useState  */ 
+useState} from "react";
+//import { answersForm } from "../../../redux/actions";
 import { useNavigate } from "react-router-dom";
 
-import style from "./Form.module.css";
+import style from "./UpdateAnswers.module.css";
 import {
   Button,
   Checkbox,
@@ -28,30 +29,50 @@ import * as Yup from "yup";
 
 import Swal from 'sweetalert2'
 
-const Form = () => {
-  const dispatch = useDispatch();
+const UpdateAnswers = () => {
+
+  //const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const formData = useSelector((state) => state.Form);
-  //console.log(formData, "data del form del estado");
+  const answersData = useSelector((state) => state.Answers);
+  console.log(answersData, "data del form de las respuestas");
 
+  const answerUpdate = Object.entries(answersData)
+    .map(([key, value]) => {
+      if (key !== "id" && key !== "createdAt" && key !== "updatedAt") {
+        return value !== null && value !== undefined ? value : "No respondió"; // Cambio aquí para manejar campos vacíos
+      }
+      return undefined;
+    })
+    .filter((value) => value !== null && value !== undefined);
+
+  console.log(answerUpdate, "respuestas del update");
+
+  const [formValues, setFormValues] = useState({});
+
+  // Inicializa formValues con los valores de answerUpdate cuando el componente se monta
   useEffect(() => {
-    dispatch(getFormData());
-  }, [dispatch]);
+    const initialValues = {};
+    answerUpdate.forEach((item) => {
+      initialValues[item.name] = item;
+    });
+    setFormValues(initialValues);
+  }, [answerUpdate]);
+
 
   // Genera initialValues a partir de formData para manejar los estados de name de los campos del formulario
   const initialValues = {};
-  formData.forEach((item) => {
-    if (item.name) {
+  answerUpdate.forEach((item, index) => {
+    if (item[index]) {
       // Asigna un valor inicial vacío para cada campo en formData
-      initialValues[item.name] = "";
+      initialValues[item[index]] = item[index];
     }
   });
 
   const handleSubmit = (data) => {
 
     try {
-      dispatch(postFormData(data))
+      //dispatch(postFormData(data))
 
       //alert('form enviado')
       Swal.fire({
@@ -80,7 +101,7 @@ const Form = () => {
   };
 
   const validationSchema = Yup.object().shape(
-    formData.reduce((schema, item) => {
+    answerUpdate.reduce((schema, item) => {
       if (item.name && item.required) {
         schema[item.name] = Yup.string().required("Debes completar este campo");
       }
@@ -89,14 +110,14 @@ const Form = () => {
   );
 
   const formik = useFormik({
-    initialValues,
+    initialValues: formValues, // Usa formValues como valores iniciales
     onSubmit: handleSubmit,
     validationSchema,
   });
 
   return (
-    <div className={style.formContainer}>
-      <form className={style.form} onSubmit={formik.handleSubmit}>
+    <div className={style.updateFormContainer}>
+      <form className={style.updateForm} onSubmit={formik.handleSubmit}>
         <Grid
           container
           spacing={3}
@@ -104,7 +125,7 @@ const Form = () => {
           alignItems={"center"}
           justifyContent={"center"}
         >
-          {formData.map((item, i) => {
+          {answerUpdate.map((item, i) => {
             if (
               item.type != "submit" &&
               item.type != "radio" &&
@@ -120,6 +141,7 @@ const Form = () => {
                     required={item.required}
                     error={formik.errors[item.name]}
                     helperText={formik.errors[item.name]}
+                    defaultValue={formik.values[item.name]} /* Usa formik.values para obtener los valores */
                     variant="outlined"
                     sx={{
                       width: 400,
@@ -150,7 +172,7 @@ const Form = () => {
         </Grid>
   
         {/* Grupo de radio para los botones de selección */}
-        {formData.map((item, i) => {
+        {answerUpdate.map((item, i) => {
           if (item.type === "radio") {
             return (
               <FormControl
@@ -159,7 +181,7 @@ const Form = () => {
                 required={item.required}
               >
                 <FormLabel>{item.label}</FormLabel>
-                <RadioGroup name={item.name}>
+                <RadioGroup name={item.name} defaultValue={formik.values[item.name]}>
                   {item.options &&
                     item.options.map((option, index) => {
                       return (
@@ -182,7 +204,7 @@ const Form = () => {
         })}
   
         {/* checkbox para la suscripcion del newsletter */}
-        {formData.map((item, index) => {
+        {answerUpdate.map((item, index) => {
           if (item.type === "checkbox") {
             return (
               <FormGroup sx={{ marginTop: "2px" }} key={index}>
@@ -218,7 +240,7 @@ const Form = () => {
         </Button>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default Form;
+export default UpdateAnswers

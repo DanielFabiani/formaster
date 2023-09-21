@@ -8,8 +8,13 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
+import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
+import { styled } from "@mui/material/styles";
+import { Link, useNavigate } from "react-router-dom";
 
 const AnswersForm = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const formData = useSelector((state) => state.Form);
@@ -37,6 +42,23 @@ const AnswersForm = () => {
 
   //console.log(answerForm, "respuestas del form");
 
+  const ButtonEmpezar = styled(Button)(() => ({
+    color: "#F0FCFD",
+    backgroundColor: "none",
+    "&:hover": {
+      backgroundColor: "#BCDEEB",
+      color: "#293241",
+    },
+  }));
+  const ButtonActualizar = styled(Button)(() => ({
+    color: "#EE6C4D",
+    backgroundColor: "none",
+    "&:hover": {
+      backgroundColor: "#F7B5A5",
+      color: "#293241",
+    },
+  }));
+
   const labelValuePairs = labels.map((label, index) => ({
     label,
     answer:
@@ -55,6 +77,13 @@ const AnswersForm = () => {
     dispatch(answersForm());
     dispatch(getFormData());
   }, [dispatch]);
+
+  const handlerButton = () => {
+    setTimeout(function () {
+      window.location.reload();
+    }, 500);
+    navigate("/");
+  };
 
   return (
     <>
@@ -106,6 +135,23 @@ const AnswersForm = () => {
           })}
         </List>
       </Grid>
+      <Stack
+        direction="row"
+        spacing={10}
+        alignItems={"center"}
+        justifyContent={"center"}
+        sx={{ mt: "26px" }}
+      >
+        <ButtonEmpezar onClick={handlerButton}>
+          Empezar nuevamente
+        </ButtonEmpezar>
+
+        <Link to='/update'>
+          <ButtonActualizar>
+            Actualiza tus respuestas
+          </ButtonActualizar>
+        </Link>
+      </Stack>
     </>
   );
 };

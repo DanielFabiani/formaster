@@ -6,10 +6,10 @@ const Home = () => {
   return (
     <div className={style.homeContainer}>
       <Typography
-        color="primary"
+        color="#F0FCFD"
         textAlign={"center"}
         variant="h3"
-        sx={{ marginTop: "24px" }}
+        sx={{ marginTop: "14px", mb: '14px' }}
       >
         ForMaster
       </Typography>
