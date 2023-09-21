@@ -1,9 +1,10 @@
 //importo las actions
-import { GET_FORM, POST_FORM } from "./actions";
+import { ANSWERS, GET_FORM, POST_FORM } from "./actions";
 
 const initialState = {
   Form: [],
   PostForm: [],
+  Answers: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -19,6 +20,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         PostForm: action.payload 
       };
+
+    case ANSWERS:
+      return {
+        ...state,
+        Answers: action.payload
+      }
 
     default:
       return { ...state };

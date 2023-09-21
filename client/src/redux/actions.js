@@ -2,6 +2,7 @@ import axios from 'axios';
 
 export const GET_FORM = 'GET_FORM';
 export const POST_FORM = 'POST_FORM';
+export const ANSWERS = 'ANSWERS';
 
 
 //traigo el formulario completo
@@ -27,6 +28,22 @@ export const postFormData = (data) => {
       dispatch({
         type: POST_FORM,
         payload: postFormData
+      })
+    } catch (error) {
+      console.error(error.message);
+    }
+  }
+}
+
+//traigo las respuestas del formulario 
+export const answersForm = () => {
+  return async (dispatch) => {
+    try {
+      const answersFormData = await axios.get('/formData/answers');
+      const answers = answersFormData.data;
+      dispatch({
+        type: ANSWERS,
+        payload: answers
       })
     } catch (error) {
       console.error(error.message);

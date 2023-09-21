@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect /* useState  */ } from "react";
 import { getFormData, postFormData } from "../../../redux/actions";
+import { useNavigate } from "react-router-dom";
 
 import style from "./Form.module.css";
 import {
@@ -21,11 +22,15 @@ import {
 import SendIcon from "@mui/icons-material/Send";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import Favorite from "@mui/icons-material/Favorite";
+
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
+import Swal from 'sweetalert2'
+
 const Form = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const formData = useSelector((state) => state.Form);
   //console.log(formData, "data del form del estado");
@@ -47,13 +52,28 @@ const Form = () => {
 
     try {
       dispatch(postFormData(data))
-      alert('form enviado')
+
+      //alert('form enviado')
+      Swal.fire({
+        title: "Respuestas enviadas correctamente correctamente!",
+        icon: 'success',
+        showConfirmButton: false,
+        timer: 2500,
+      }) /* .then((result) => {
+        if (result) {
+          setTimeout(function() {
+            window.location.reload()
+          }, 300)
+        }
+      }) */
+
+      navigate('/answer')
       console.log("Datos enviados: ", data);
       // Limpiar el formulario y restablecer los valores iniciales
       /* formik.resetForm(''); */
-      setTimeout(function() {
+      /* setTimeout(function() {
         window.location.reload()
-      }, 300)
+      }, 300) */
     } catch (error) {
       console.error(error.message);
     }
@@ -118,7 +138,7 @@ const Form = () => {
                   >
                     {item.options &&
                       item.options.map((option, index) => (
-                        <MenuItem key={index} value={option.value}>
+                        <MenuItem key={index} value={option.label}>
                           {option.label}
                         </MenuItem>
                       ))}
@@ -146,7 +166,7 @@ const Form = () => {
                         <FormControlLabel
                           onChange={formik.handleChange}
                           key={index} // Usa el valor de la opción como clave
-                          value={option.value} // Usa el valor de la opción como valor
+                          value={option.label} // Usa el valor de la opción como valor
                           control={<Radio />}
                           label={option.label} // Usa la etiqueta de la opción como etiqueta
                         />
