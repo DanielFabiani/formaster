@@ -1,6 +1,6 @@
 <div align='center'>
 
-<h1>Formularios dinámicos</h1>
+<h1>ForMaster, formularios dinámicos</h1>
 <p>Este proyecto consiste en el desarrollo de una aplicación que tiene como objetivo principal la creación y gestión de encuestas personalizadas. La aplicación está diseñada para leer archivos JSON proporcionados y mostrar interfaces de encuestas dinámicas basadas en estos datos. Además, ofrece la capacidad de enviar las respuestas de las encuestas a una base de datos seleccionada por el usuario, garantizando que esta base de datos sea de propiedad exclusiva y que no se comparta acceso a la misma.</p>
 
 <h4> <span> · </span> <a href="https://github.com/DanielFabiani/formaster/blob/master/README.md"> Documentation </a> <span> · </span> <a href="https://github.com/DanielFabiani/formaster/issues"> Report Bug </a> <span> · </span> <a href="https://github.com/DanielFabiani/formaster/issues"> Request Feature </a> </h4>
