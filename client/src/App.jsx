@@ -4,7 +4,8 @@ import Home from "./components/pages/Home/Home";
 import axios from "axios";
 import AnswersForm from "./components/pages/AnswersForm/AnswersForm";
 import UpdateAnswers from "./components/pages/UpdateAnswers/UpdateAnswers";
-axios.defaults.baseURL = 'http://localhost:3001/';
+//axios.defaults.baseURL = 'http://localhost:3001/';
+axios.defaults.baseURL = 'https://formaster.onrender.com/';
 
 function App() {
   return (
