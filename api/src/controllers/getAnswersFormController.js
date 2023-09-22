@@ -6,7 +6,7 @@ const { Form } = require("../db");
 const answersFormData = async () => {
 
   const lastForm = await Form.findOne({
-    order: [[ 'id', 'DESC']] // Ordena por id en orden descendente
+    order: [[ 'id', 'ASC']] // Ordena por id en orden descendente
   });
 
   if (!lastForm) {
