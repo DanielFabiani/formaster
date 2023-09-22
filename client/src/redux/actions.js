@@ -39,7 +39,7 @@ export const postFormData = (data) => {
 export const patchUserForm = (data) => {
   return async (dispatch) => {
     try {
-      const patchData = await axios.patch('formData', data);
+      const patchData = await axios.patch('/formData', data);
       dispatch ({
         type: PATCH_FORM,
         payload: patchData
