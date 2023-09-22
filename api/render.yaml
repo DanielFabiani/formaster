@@ -1,7 +1,0 @@
-services:
-  - type: web
-    name: api
-    routes:
-      - path: /api   # Ruta para la API
-        dir: /api   # Directorio de la aplicación API
-    buildCommand: npm install   # Comando para construir la aplicación API
