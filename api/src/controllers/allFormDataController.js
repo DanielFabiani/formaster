@@ -38,7 +38,7 @@ const allFormData = async () => {
     return extractedData;
   });
 
-  console.log(formData, "items cargados");
+  //console.log(formData, "items cargados");
   return formData;
 };
 
