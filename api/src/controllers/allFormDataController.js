@@ -14,7 +14,7 @@ const allFormData = async () => {
   } */
 
   const createItems = JSON.parse(
-    fs.readFileSync(path.join(__dirname, "../data/form.json"))
+    fs.readFileSync(path.join(__dirname, "../data/Form.json"))
   );
 
   // creo el objeto que voy a devolver cada propiedad name del json
