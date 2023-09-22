@@ -20,6 +20,7 @@
 const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
 require('dotenv').config();
+const { PORT } = process.env;
 
 // Syncing all the models at once.
 //! una vez terminado el desarrollo cambiar a {force: false}
