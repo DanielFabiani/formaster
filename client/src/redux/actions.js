@@ -10,7 +10,7 @@ export const PATCH_FORM = 'PATCH_FORM'
 export const getFormData = () => {
   return async (dispatch) => {
     try {
-      const getFormData = await axios.get('https://formaster-production.up.railway.app/formData');
+      const getFormData = await axios.get('/formData');
       const formData = getFormData.data;
       dispatch({
         type: GET_FORM,
@@ -25,7 +25,7 @@ export const getFormData = () => {
 export const postFormData = (data) => {
   return async (dispatch) => {
     try {
-      const postFormData = await axios.post('https://formaster-production.up.railway.app/formData', data);
+      const postFormData = await axios.post('/formData', data);
       dispatch({
         type: POST_FORM,
         payload: postFormData
@@ -39,7 +39,7 @@ export const postFormData = (data) => {
 export const patchUserForm = (data) => {
   return async (dispatch) => {
     try {
-      const patchData = await axios.patch('https://formaster-production.up.railway.app/formData', data);
+      const patchData = await axios.patch('formData', data);
       dispatch ({
         type: PATCH_FORM,
         payload: patchData
@@ -55,7 +55,7 @@ export const patchUserForm = (data) => {
 export const answersForm = () => {
   return async (dispatch) => {
     try {
-      const answersFormData = await axios.get('https://formaster-production.up.railway.app/formData/answers');
+      const answersFormData = await axios.get('/formData/answers');
       const answers = answersFormData.data;
       dispatch({
         type: ANSWERS,
