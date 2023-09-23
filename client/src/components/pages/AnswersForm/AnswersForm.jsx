@@ -74,8 +74,8 @@ const AnswersForm = () => {
   //console.log(labelValuePairs);
 
   useEffect(() => {
-    dispatch(answersForm());
     dispatch(getFormData());
+    dispatch(answersForm());
   }, [dispatch]);
 
   const handlerButton = () => {

@@ -22,6 +22,23 @@ export const getFormData = () => {
   }
 };
 
+//traigo las respuestas del formulario 
+export const answersForm = () => {
+  return async (dispatch) => {
+    try {
+      const answersFormData = await axios.get('/formData/answers');
+      const answers = answersFormData.data;
+      dispatch({
+        type: ANSWERS,
+        payload: answers
+      })
+    } catch (error) {
+      console.error(error.message);
+    }
+  }
+}
+
+
 export const postFormData = (data) => {
   return async (dispatch) => {
     try {
@@ -51,18 +68,3 @@ export const patchUserForm = (data) => {
   }
 }
 
-//traigo las respuestas del formulario 
-export const answersForm = () => {
-  return async (dispatch) => {
-    try {
-      const answersFormData = await axios.get('/formData/answers');
-      const answers = answersFormData.data;
-      dispatch({
-        type: ANSWERS,
-        payload: answers
-      })
-    } catch (error) {
-      console.error(error.message);
-    }
-  }
-}
