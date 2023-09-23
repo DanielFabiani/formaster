@@ -58,7 +58,7 @@ const Form = () => {
         title: "Respuestas enviadas correctamente!",
         icon: 'success',
         showConfirmButton: false,
-        timer: 2500,
+        timer: 30500,
       }) 
 
       navigate('/answer')
