@@ -25,10 +25,12 @@
 <details> <summary>Client</summary> <ul>
 <li><a href="">react</a></li>
 <li><a href="">Material UI</a></li>
+<li>Deploy front <a href="https://vercel.com/">vercel.com</a></li>
 </ul> </details>
 <details> <summary>Server</summary> <ul>
 <li><a href="">Node Js</a></li>
 <li><a href="">Express</a></li>
+<li>Deploy back y DB <a href="https://render.com/">render.com</a></li>
 </ul> </details>
 <details> <summary>Database</summary> <ul>
 <li><a href="">SQL</a></li>
