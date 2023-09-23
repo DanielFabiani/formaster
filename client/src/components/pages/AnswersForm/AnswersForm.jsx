@@ -81,7 +81,7 @@ const AnswersForm = () => {
   const handlerButton = () => {
     setTimeout(function () {
       window.location.reload();
-    }, 500);
+    }, 50);
     navigate("/");
   };
 

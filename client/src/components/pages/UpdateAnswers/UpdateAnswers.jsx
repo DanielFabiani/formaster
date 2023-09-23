@@ -53,20 +53,36 @@ const Form = () => {
     try {
       dispatch(patchUserForm(data));
 
+      let timerInterval
       Swal.fire({
-        title: "Respuestas actualizadas correctamente!",
-        icon: "success",
+        title: "Actualizaste tus respuestas",
+        html: 'Veras tu actualización en: <b></b> milisegundos.',
+        color: '#f7fdfe',
+        background: '#3D5A80',
+        icon: 'success',
         showConfirmButton: false,
-        timer: 2500,
-      }).then((result) => {
+        timer: 5000, //-> el tiempo
+        timerProgressBar: true,
+        didOpen: () => {
+          Swal.showLoading()
+          const b = Swal.getHtmlContainer().querySelector('b')
+          timerInterval = setInterval(() => {
+            b.textContent = Swal.getTimerLeft()
+          }, 100)
+        },
+        willClose: () => {
+          clearInterval(timerInterval)
+        }
+      }) .then((result) => {
+        if (result.dismiss === Swal.DismissReason.timer) {
+          console.log('I was closed by the timer')
+        }
         if (result) {
-          setTimeout(function () {
-            window.location.reload();
-          }, 500);
-          navigate("/");
+          navigate("/answer");
         }
       });
-      console.log("Datos enviados: ", data);
+
+      //console.log("Datos enviados: ", data);
     } catch (error) {
       console.error(error.message);
     }

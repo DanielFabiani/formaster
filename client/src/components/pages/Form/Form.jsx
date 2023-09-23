@@ -48,20 +48,45 @@ const Form = () => {
     }
   });
 
-  const handleSubmit = (data) => {
+
+  const handleSubmit = (data, formik) => {
 
     try {
       dispatch(postFormData(data))
 
+      formik.resetForm();
+
       //alert('form enviado')
+      let timerInterval
       Swal.fire({
-        title: "Respuestas enviadas correctamente!",
+        title: "Completaste el formulario",
+        html: 'Sera enviado en: <b></b> milisegundos.',
+        color: '#f7fdfe',
+        background: '#3D5A80',
         icon: 'success',
         showConfirmButton: false,
-        timer: 2500,
-      }) 
+        timer: 5000, //-> el tiempo
+        timerProgressBar: true,
+        didOpen: () => {
+          Swal.showLoading()
+          const b = Swal.getHtmlContainer().querySelector('b')
+          timerInterval = setInterval(() => {
+            b.textContent = Swal.getTimerLeft()
+          }, 100)
+        },
+        willClose: () => {
+          clearInterval(timerInterval)
+        }
+      }) .then((result) => {
+        if (result.dismiss === Swal.DismissReason.timer) {
+          console.log('I was closed by the timer')
+        }
+        if (result) {
+          navigate("/answer");
+        }
+      });
 
-      navigate('/answer')
+      //navigate('/answer')
       console.log("Datos enviados: ", data);
       
     } catch (error) {
