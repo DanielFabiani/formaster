@@ -6,17 +6,12 @@ const { Form } = require("../db");
 const answersFormData = async () => {
 
   const lastForm = await Form.findOne({
-    order: [['id', 'ASC']] // Ordena por id en orden descendente
+    order: [[ 'id', 'DESC']] // Ordena por id en orden descendente
   });
-  
-  let nextId;
-  
+
   if (!lastForm) {
-    // Si no se encontró ningún formulario, asigna el ID 1 como el siguiente
-    nextId = 1;
-  } else {
-    // Calcula el siguiente ID como el último ID + 1
-    nextId = lastForm.id + 1;
+    console.log('No se encontró el formulario');
+    return null;
   }
 
   /* const lastId = await Form.max('id');
