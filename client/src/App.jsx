@@ -6,7 +6,7 @@ import UpdateAnswers from "./components/pages/UpdateAnswers/UpdateAnswers";
 import axios from "axios";
 //axios.defaults.baseURL = 'http://localhost:3001/';
 //axios.defaults.baseURL = 'https://formaster.onrender.com/';
-axios.defaults.baseURL = 'formaster-production.up.railway.app/';
+axios.defaults.baseURL = 'https://formaster-production.up.railway.app/';
 
 function App() {
   return (
