@@ -61,7 +61,7 @@ const Form = () => {
         background: '#3D5A80',
         icon: 'success',
         showConfirmButton: false,
-        timer: 5000, //-> el tiempo
+        timer: 4000, //-> el tiempo
         timerProgressBar: true,
         didOpen: () => {
           Swal.showLoading()
