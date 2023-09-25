@@ -10,6 +10,7 @@
 
 # :notebook_with_decorative_cover: Table of Contents
 
+- [Deploy](https://formaster.vercel.app/)
 - [About the Project](#star2-about-the-project)
 - [Contact](#handshake-contact)
 - [Acknowledgements](#gem-acknowledgements)
